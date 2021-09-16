@@ -11,6 +11,7 @@ function ProductFeed({ products }) {
                 .map(({ id, title, price, description, category, image }) => (
                     <Product
                         key={id}
+                        id={id}
                         title={title}
                         price={price}
                         description={description}
@@ -37,6 +38,7 @@ function ProductFeed({ products }) {
                         }) => (
                             <Product
                                 key={id}
+                                id={id}
                                 title={title}
                                 price={price}
                                 description={description}
@@ -51,6 +53,7 @@ function ProductFeed({ products }) {
                 .map(({ id, title, price, description, category, image }) => (
                     <Product
                         key={id}
+                        id={id}
                         title={title}
                         price={price}
                         description={description}
