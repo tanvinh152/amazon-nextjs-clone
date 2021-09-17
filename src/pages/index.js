@@ -1,38 +1,41 @@
 import axios from "axios";
+import { getSession } from "next-auth/client";
 import Head from "next/head";
 import Banner from "../components/Banner";
 import Header from "../components/Header";
 import ProductFeed from "../components/ProductFeed";
 
-export default function Home({products}) {
-  return (
-    <div className='bg-gray-100 '>
-      <Head>
-        <title>Amazon 2.0</title>
-      </Head>
+export default function Home({ products }) {
+    return (
+        <div className="bg-gray-100 ">
+            <Head>
+                <title>Amazon 2.0</title>
+            </Head>
 
-      {/* Header */}
-      <Header />
+            {/* Header */}
+            <Header />
 
-      <main className="max-w-screen-2xl mx-auto">
-        {/* Banner */}
-        <Banner />
-        {/* ProductFeed */}
-        <ProductFeed products={products}/>
-      </main>
-    </div>
-  );
+            <main className="max-w-screen-2xl mx-auto">
+                {/* Banner */}
+                <Banner />
+                {/* ProductFeed */}
+                <ProductFeed products={products} />
+            </main>
+        </div>
+    );
 }
 
-export async function getServerSideProps(context){
-  try {
-    const {data} = await axios.get('https://fakestoreapi.com/products')
-    return {
-      props:{
-        products: data
-      }
+export async function getServerSideProps(context) {
+    try {
+        const session = await getSession(context);
+        const { data } = await axios.get("https://fakestoreapi.com/products");
+        return {
+            props: {
+                products: data,
+                session,
+            },
+        };
+    } catch (error) {
+        console.log(error);
     }
-  } catch (error) {
-    console.log(error);
-  }
 }

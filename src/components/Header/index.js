@@ -9,13 +9,13 @@ import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { selectItems } from "../../slices/basketSlice";
 
-function index() {
+function Header() {
     const router = useRouter();
     const [session] = useSession();
     const items = useSelector(selectItems);
 
     return (
-        <header className='sticky top-0 z-50'>
+        <header className="sticky top-0 z-50">
             {/* Top nav */}
             <div className="flex items-center bg-amazon_blue p-1 flex-grow py-2">
                 <div className="mt-2 flex items-center flex-grow sm:flex-grow-0">
@@ -47,7 +47,10 @@ function index() {
                             Account & Lists
                         </p>
                     </div>
-                    <div className="link">
+                    <div
+                        onClick={() => session && router.push("/orders")}
+                        className="link"
+                    >
                         <p>Returns</p>
                         <p className="font-extrabold md:text-sm">& Orders</p>
                     </div>
@@ -90,4 +93,4 @@ function index() {
     );
 }
 
-export default index;
+export default Header;
